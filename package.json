@@ -1,0 +1,41 @@
+{
+  "name": "melody",
+  "version": "1.0.0",
+  "description": "Melody provides a clean, fluent API for defining basic Gulp tasks for your Symfony application",
+  "main": "melody.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unifacile/melody.git"
+  },
+  "keywords": [
+    "melody",
+    "gulp",
+    "js",
+    "symfony",
+    "minifier",
+    "uglifier",
+    "minify",
+    "uglify",
+    "sass",
+    "typescript"
+  ],
+  "author": "Mattia Mariselli <mattia.mariselli@gmail.com>",
+  "contributors": [
+    {
+      "name": "Vittorio Morganti",
+      "email": "vitto.morganti@gmail.com",
+      "url": "http://www.toioski.it"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/unifacile/melody/issues"
+  },
+  "homepage": "https://github.com/unifacile/melody#readme",
+  "dependencies": {
+    "lodash": "^4.13.1"
+  }
+}
