@@ -1,7 +1,7 @@
 var Player = function (executor, config,environments) {
     var self = this;
     var buffer = [];
-    var Piper = require('piper');
+    var Piper = require('./piper');
     var piper = new Piper(executor);
     var environment = {};
 
