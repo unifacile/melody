@@ -2,6 +2,8 @@ var Player = function (executor, config,environments) {
     var self = this;
     var buffer = [];
     var Piper = require('./piper');
+    const _ = require('lodash');
+
     var piper = new Piper(executor);
     var environment = config;
 
@@ -20,7 +22,9 @@ var Player = function (executor, config,environments) {
         if(!_.has(environments, envName)){
             throw "The environment "+envName+" doesn't exist";
         }
-        environment = _.defaultsDeep(environments[env], config);
+        environment = _.defaultsDeep(environments[envName], config);
+
+        return self;
     };
 
     self.bower = function (path, extension) {

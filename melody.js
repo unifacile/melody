@@ -110,14 +110,10 @@ module.exports = function (configuration) {
         var envKeys = _.keys(data);
         var defaultKeys = _.keys(defaultConfigs);
 
-        var wrongKeys = _.filter(envKeys,function(key){
-            if(!_.some(defaultKeys, key)){
-                return key;
-            }
-        });
+        var wrongKeys = _.difference(envKeys, defaultKeys);
 
         if(wrongKeys.length>0){
-            throw "Some evironment's variable is not corretc: ". wrongKeys.join(", ");
+            throw "Some evironment's variable is not corretc: " + wrongKeys.join(", ");
         }
         environments[envName] = data;
     }
