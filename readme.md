@@ -18,7 +18,7 @@ Then install __melody__ in your project:
  npm install melody-gulp
  ```
  
- ## Usage
+## Usage
  Create your classic gulp file and use the melody library in this way:
 _gulpfile.js_ 
 ```js
