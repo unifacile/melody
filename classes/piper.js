@@ -13,20 +13,20 @@ var Piper = function (executor) {
         return self;
     };
 
-    self.compass = function (compassConfig) {
-        return pipeline.run(app.compass(compassConfig));
+    self.compass = function (config) {
+        return pipeline.run(app.compass(config));
     };
 
-    self.style = function () {
-        return pipeline.run(app.style);
+    self.style = function (config) {
+        return pipeline.run(app.style(config));
     };
 
-    self.script = function () {
-        return pipeline.run(app.script);
+    self.script = function (config) {
+        return pipeline.run(app.script(config));
     };
 
-    self.copy = function () {
-        return pipeline.run(app.copy);
+    self.copy = function (config) {
+        return pipeline.run(app.copy(config));
     };
 };
 
