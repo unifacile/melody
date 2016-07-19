@@ -1,4 +1,5 @@
 var Piper = function () {
+    var Pipeline = require('./classes/pipeline');
     var pipeline = new Pipeline(app);
     var self = this;
     /**

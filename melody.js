@@ -4,8 +4,6 @@ module.exports = function (configuration) {
     const gulp = require('gulp');
     const executor = require('./classes/executor')(gulp, plugins);
     const _ = require('lodash');
-    var Pipeline = require('./classes/pipeline');
-    var Piper = require('./classes/piper');
     var Player = require('./classes/player');
 
     if(!configuration){
@@ -84,7 +82,7 @@ module.exports = function (configuration) {
 
 
     function addGulpTask(/* name, tasksToExecute, callback */) {
-        var player = new Player(config,environments);
+        var player = new Player(executor, config, environments);
         var name = arguments[0];
         var callback, dependentTasks;
 
@@ -125,12 +123,6 @@ module.exports = function (configuration) {
     }
 
     return {
-        pipeline: function () {
-            return new Pipeline(executor);
-        },
-        play: function () {
-            return new Piper();
-        },
         env: addEnvironment,
         compose: addGulpTask,
         config: config

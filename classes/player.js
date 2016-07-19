@@ -1,7 +1,8 @@
-var Player = function (config,environments) {
+var Player = function (executor, config,environments) {
     var self = this;
     var buffer = [];
-    var piper = new Piper();
+    var Piper = require('piper');
+    var piper = new Piper(executor);
     var environment = {};
 
     var jollyPattern = function (path, extension) {
