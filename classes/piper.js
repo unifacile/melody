@@ -6,27 +6,28 @@ var Piper = function (executor) {
      *
      * @param data Array of files
      * @param file Filename destination
+     * @param environment Local configuration
      * @returns {Piper}
      */
-    self.add = function (data, file) {
-        pipeline.add(data, file);
+    self.add = function (data, file, environment) {
+        pipeline.add(data, file, environment);
         return self;
     };
 
-    self.compass = function (config) {
-        return pipeline.run(executor.compass(config));
+    self.compass = function () {
+        return pipeline.run(executor.compass);
     };
 
-    self.style = function (config) {
-        return pipeline.run(executor.style(config));
+    self.style = function () {
+        return pipeline.run(executor.style);
     };
 
-    self.script = function (config) {
-        return pipeline.run(executor.script(config));
+    self.script = function () {
+        return pipeline.run(executor.script);
     };
 
-    self.copy = function (config) {
-        return pipeline.run(executor.copy(config));
+    self.copy = function () {
+        return pipeline.run(executor.copy);
     };
 };
 

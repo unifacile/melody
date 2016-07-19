@@ -19,6 +19,10 @@ var Player = function (executor, config,environments) {
     };
 
     self.env = function (envName) {
+        if(envName === 'default'){
+            environment = config;
+            return self;
+        }
         if(!_.has(environments, envName)){
             throw "The environment "+envName+" doesn't exist";
         }
@@ -54,13 +58,13 @@ var Player = function (executor, config,environments) {
     };
 
     self.record = function (destination) {
-        piper.add(buffer, destination);
+        piper.add(buffer, destination, environment);
         buffer = [];
         return self;
     };
 
     self.compass = function () {
-        return piper.compass(environment);
+        return piper.compass();
     };
     self.style = function () {
         //var compassConfig = {};
@@ -84,15 +88,15 @@ var Player = function (executor, config,environments) {
         //        };
         //        break;
         //}
-        return piper.style(environment);
+        return piper.style();
     };
 
     self.script = function () {
-        return piper.script(environment);
+        return piper.script();
     };
 
     self.copy = function () {
-        return piper.copy(environment);
+        return piper.copy();
     };
 };
 

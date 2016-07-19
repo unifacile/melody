@@ -21,7 +21,7 @@ Pipeline.prototype.run = function (callable) {
     var deferred = Q.defer();
     var i = 0;
     var entries = this.entries;
-    var app = this.app;
+    var executor = this.executor;
 
     var runNextEntry = function () {
         // see if we're all done looping
@@ -30,9 +30,9 @@ Pipeline.prototype.run = function (callable) {
             return;
         }
 
-        // pass app as this, though we should avoid using "this"
+        // pass executor as this, though we should avoid using "this"
         // in those functions anyways
-        callable.apply(app, entries[i]).on('end', function () {
+        callable.apply(executor, entries[i]).on('end', function () {
             i++;
             runNextEntry();
         });
