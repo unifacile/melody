@@ -16,6 +16,7 @@ module.exports = function (configuration) {
         revManifestPath: 'app/Resources/assets/rev-manifest.json',
         publicPath:'web/',
         bowerPath:'vendor/bower_components/',
+        assetPath:'app/Resources/assets/',
         cssPath:'assets/css/',
         jsPath:'assets/js/',
         compassSassFolder:false
@@ -33,53 +34,6 @@ module.exports = function (configuration) {
      *      - jsPath: ex. assets/js/
      */
     var environments = [];
-
-    /**
-     * Configurazione
-     *
-     * N.B. è una funzione e non un oggetto cosi da poter riutilizzare
-     * da subito i valori definiti
-     */
-    /*
-    var config = new function () {
-        this.resourcePath = 'app/Resources';
-        this.path = {
-            public: 'web',
-            css: 'assets/css/',
-            javascript: 'assets/js/',
-            backendAssets: this.resourcePath + '/ui-backend/assets',
-            frontendAssets: this.resourcePath + '/ui-alpha/assets',
-            bower: 'vendor/bower_components',
-            coreBundleResources: 'src/Unifacile/CoreBundle/Resources'
-        };
-        this.sass = {
-            pattern: 'sass/**'+'/*.scss',
-            frontendSrc: this.resourcePath + '/ui-alpha/assets/sass',
-            backendSrc: this.resourcePath + '/ui-backend/assets/sass',
-            dependecies: ['sass-globbing']
-        };
-        this.js = {
-            pattern: 'js/**'+'/*.js'
-        };
-        this.production = !!plugins.util.env.production;
-        this.sourceMaps = !plugins.util.env.production;
-        this.revManifestPath = this.resourcePath + '/assets/rev-manifest.json';
-    };
-
-    // Aggiorna configurazione con i valori passati per parametro
-    if (typeof configParams !== 'undefined') {
-        if (configParams.hasOwnProperty('backendAssets') && configParams.backendAssets !== 'undefined') {
-            config.path.backendAssets = config.resourcePath + configParams.backendAssets;
-        }
-        if (configParams.hasOwnProperty('frontendAssets') && configParams.frontendAssets !== 'undefined') {
-            config.path.frontendAssets = config.resourcePath + configParams.frontendAssets;
-        }
-        if (configParams.hasOwnProperty('bower') && configParams.bower !== 'undefined') {
-            config.path.bower = configParams.bower;
-        }
-    }
-    */
-
 
     function addGulpTask(/* name, tasksToExecute, callback */) {
         var player = new Player(executor, config, environments);

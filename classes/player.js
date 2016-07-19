@@ -44,6 +44,12 @@ var Player = function (executor, config,environments) {
         return self;
     };
 
+    self.asset = function (path, extension) {
+        path = jollyPattern(path, extension);
+        buffer.push(environment.assetPath + path);
+        return self;
+    };
+
 
     self.public = function (path, extension) {
         path = jollyPattern(path, extension);
@@ -67,27 +73,6 @@ var Player = function (executor, config,environments) {
         return piper.compass();
     };
     self.style = function () {
-        //var compassConfig = {};
-        //switch (section) {
-        //    case Section.BACKEND:
-        //        compassConfig = {
-        //            sass: config.sass.backendSrc,
-        //            require: config.sass.dependecies
-        //        };
-        //        break;
-        //    case Section.FRONTEND:
-        //        compassConfig = {
-        //            sass: config.sass.frontendSrc,
-        //            require: config.sass.dependecies
-        //        };
-        //        break;
-        //    default:
-        //        compassConfig = {
-        //            sass: config.sass.frontendSrc,
-        //            require: config.sass.dependecies
-        //        };
-        //        break;
-        //}
         return piper.style();
     };
 
