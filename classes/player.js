@@ -29,7 +29,7 @@ var Player = function (config,environments) {
     };
 
 
-    self.asset = function (path, extension) {
+    self.resource = function (path, extension) {
         path = jollyPattern(path, extension);
         buffer.push(environment.resourcePath + path);
         return self;

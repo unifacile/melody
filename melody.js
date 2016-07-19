@@ -18,7 +18,7 @@ module.exports = function (configuration) {
         revManifestPath: 'app/Resources/assets/rev-manifest.json',
         publicPath:'web/',
         bowerPath:'vendor/bower_components/',
-        cssPath:'asset/css/',
+        cssPath:'assets/css/',
         jsPath:'assets/js/',
         compassSassFolder:false
     };
