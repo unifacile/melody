@@ -1,5 +1,5 @@
-var del = require('del');
 module.exports = function (gulp, plugins) {
+    var del = require('del');
     return {
         compass: function (config) {
             return function (srcFiles, outputFilename) {

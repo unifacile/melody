@@ -2,7 +2,7 @@
 module.exports = function (configuration) {
     const plugins = require('gulp-load-plugins')();
     const gulp = require('gulp');
-    const executor = require('./executor')(gulp, plugins);
+    const executor = require('./classes/executor')(gulp, plugins);
     const _ = require('lodash');
     var Pipeline = require('./classes/pipeline');
     var Piper = require('./classes/piper');
