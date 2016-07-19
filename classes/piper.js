@@ -14,19 +14,19 @@ var Piper = function (executor) {
     };
 
     self.compass = function (config) {
-        return pipeline.run(app.compass(config));
+        return pipeline.run(executor.compass(config));
     };
 
     self.style = function (config) {
-        return pipeline.run(app.style(config));
+        return pipeline.run(executor.style(config));
     };
 
     self.script = function (config) {
-        return pipeline.run(app.script(config));
+        return pipeline.run(executor.script(config));
     };
 
     self.copy = function (config) {
-        return pipeline.run(app.copy(config));
+        return pipeline.run(executor.copy(config));
     };
 };
 

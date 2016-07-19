@@ -3,7 +3,7 @@ var Player = function (executor, config,environments) {
     var buffer = [];
     var Piper = require('./piper');
     var piper = new Piper(executor);
-    var environment = {};
+    var environment = config;
 
     var jollyPattern = function (path, extension) {
         if (extension) {
