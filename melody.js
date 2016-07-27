@@ -6,20 +6,21 @@ module.exports = function (configuration) {
     const _ = require('lodash');
     var Player = require('./classes/player');
 
-    if(!configuration){
+    if (!configuration) {
         configuration = {};
     }
     var defaultConfigs = {
         resourcePath: 'app/Resources/',
         production: !!plugins.util.env.production,
         sourceMaps: !plugins.util.env.production,
+        revManifest: true,
         revManifestPath: 'app/Resources/assets/rev-manifest.json',
-        publicPath:'web/',
-        bowerPath:'vendor/bower_components/',
-        assetPath:'app/Resources/assets/',
-        cssPath:'assets/css/',
-        jsPath:'assets/js/',
-        compassSassFolder:false
+        publicPath: 'web/',
+        bowerPath: 'vendor/bower_components/',
+        assetPath: 'app/Resources/assets/',
+        cssPath: 'assets/css/',
+        jsPath: 'assets/js/',
+        compassSassFolder: false
     };
 
     var config = _.defaultsDeep(configuration, defaultConfigs);
@@ -66,14 +67,25 @@ module.exports = function (configuration) {
 
         var wrongKeys = _.difference(envKeys, defaultKeys);
 
-        if(wrongKeys.length>0){
-            throw "Some evironment's variable is not corretc: " + wrongKeys.join(", ");
+        if (wrongKeys.length > 0) {
+            throw "Some environment variable is not correct: " + wrongKeys.join(", ");
         }
         environments[envName] = data;
     }
 
+    function getEnvinronmentConfiguration(env, key) {
+        if (!_.has(environments, env)) {
+            throw "The environment " + env + " not exist";
+        }
+        if (!_.has(environments[env], key)) {
+            throw "The property " + key + " not exist in environment " + env;
+        }
+        return environments[env][key];
+    }
+
     return {
         env: addEnvironment,
+        envConfig: getEnvinronmentConfiguration,
         compose: addGulpTask,
         config: config
     };
