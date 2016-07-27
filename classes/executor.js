@@ -24,10 +24,10 @@ module.exports = function (gulp, plugins) {
                 .pipe(config.production ? plugins.minifyCss() : plugins.util.noop());
 
             if (config.revManifest) {
-                promise.pipe(plugins.rev());
+                promise = promise.pipe(plugins.rev());
             }
 
-            promise
+            promise = promise
                 .pipe(plugins.if(config.sourceMaps, plugins.sourcemaps.write('.')))
                 .pipe(gulp.dest(config.publicPath))
                 .on('end', function () {
@@ -37,12 +37,12 @@ module.exports = function (gulp, plugins) {
 
             if (config.revManifest) {
                 // Write the rev-manifest.json file for gulp-rev
-                promise.pipe(plugins.rev.manifest(config.revManifestPath, {
+                promise = promise.pipe(plugins.rev.manifest(config.revManifestPath, {
                     merge: true
                 }));
             }
 
-            promise.pipe(gulp.dest('.'));
+            promise = promise.pipe(gulp.dest('.'));
 
             return promise;
         },
@@ -57,20 +57,20 @@ module.exports = function (gulp, plugins) {
                 .pipe(config.production ? plugins.minifyCss() : plugins.util.noop());
 
             if (config.revManifest) {
-                promise.pipe(plugins.rev());
+                promise = promise.pipe(plugins.rev());
             }
 
-            promise
+            promise = promise
                 .pipe(plugins.if(config.sourceMaps, plugins.sourcemaps.write('.')))
                 .pipe(gulp.dest(config.publicPath));
 
             if (config.revManifest) {
-                promise.pipe(plugins.rev.manifest(config.revManifestPath, {
+                promise = promise.pipe(plugins.rev.manifest(config.revManifestPath, {
                     merge: true
                 }));
             }
 
-            promise.pipe(gulp.dest('.'));
+            promise = promise.pipe(gulp.dest('.'));
 
             return promise;
         },
@@ -82,20 +82,20 @@ module.exports = function (gulp, plugins) {
                 .pipe(config.production ? plugins.uglify() : plugins.util.noop());
 
             if (config.revManifest) {
-                promise.pipe(plugins.rev());
+                promise = promise.pipe(plugins.rev());
             }
 
-            promise
+            promise = promise
                 .pipe(plugins.if(config.sourceMaps, plugins.sourcemaps.write('.')))
                 .pipe(gulp.dest(config.publicPath));
 
             if (config.revManifest) {
                 // Write the rev-manifest.json file for gulp-rev
-                promise.pipe(plugins.rev.manifest(config.revManifestPath, {
+                promise = promise.pipe(plugins.rev.manifest(config.revManifestPath, {
                     merge: true
                 }));
             }
-            promise.pipe(gulp.dest('.'));
+            promise = promise.pipe(gulp.dest('.'));
 
             return promise;
         },
