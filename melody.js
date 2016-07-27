@@ -83,9 +83,14 @@ module.exports = function (configuration) {
         return environments[env][key];
     }
 
+    function addWatcher(path, tasks) {
+        return gulp.watch(path, tasks);
+    }
+
     return {
         env: addEnvironment,
         envConfig: getEnvinronmentConfiguration,
+        watch: addWatcher,
         compose: addGulpTask,
         config: config
     };
