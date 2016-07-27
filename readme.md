@@ -54,6 +54,46 @@ This is the default configuration:
      assetPath:'app/Resources/assets/',
      cssPath:'assets/css/',
      jsPath:'assets/js/',
-     compassSassFolder:false
+     compassSassFolder:false,
+     revManifest: true
  };
+```
+
+### Override global configurations - environments
+```js
+var melody = require('melody-gulp')({
+    cssPath:'css/'
+});
+ 
+melody.env('frontend',{
+     cssPath:'frontend/css/'
+ });
+ 
+melody.compose('default',function(play){
+return play
+        .resource('assets/sass/homepage.sass')
+        .resource('assets/sass/contacts.sass')
+        .resource('assets/sass/links.sass')
+        .record('pages.css')
+        .style();
+});
+
+melody.compose('styles-frontend',function(play){
+ return play
+         .env('frontend')
+         .resource('assets/sass/homepage.sass')
+         .resource('assets/sass/contacts.sass')
+         .resource('assets/sass/links.sass')
+         .record('pages.css')
+         .style();
+});
+
+/**
+ * Watch for SCSS change
+ */
+gulp.task('watch', function () {
+    gulp.watch(melody.envConfig('frontend','cssPath') + '/**/*.scss', ['styles-frontend']);
+});
+
+
 ```
