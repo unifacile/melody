@@ -3,6 +3,7 @@ var Player = function (executor, config,environments) {
     var buffer = [];
     var Piper = require('./piper');
     const _ = require('lodash');
+    const del = require('del');
 
     var piper = new Piper(executor);
     var environment = config;
@@ -82,6 +83,11 @@ var Player = function (executor, config,environments) {
 
     self.copy = function () {
         return piper.copy();
+    };
+
+    self.del = function (path, extension) {
+        path = jollyPattern(path, extension);
+        del.sync(path);
     };
 };
 
