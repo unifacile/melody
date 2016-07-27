@@ -1,6 +1,6 @@
 {
   "name": "melody-gulp",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Melody provides a clean, fluent API for defining basic Gulp tasks for your Symfony application",
   "main": "melody.js",
   "scripts": {
