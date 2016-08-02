@@ -10,6 +10,7 @@ module.exports = function (configuration) {
         configuration = {};
     }
     var defaultConfigs = {
+        debug: false,
         resourcePath: 'app/Resources/',
         production: !!plugins.util.env.production,
         sourceMaps: !plugins.util.env.production,

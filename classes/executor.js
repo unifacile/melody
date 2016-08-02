@@ -13,7 +13,7 @@ module.exports = function (gulp, plugins) {
             var promise = gulp.src(srcFiles)
                 .pipe(plugins.plumber())
                 .pipe(plugins.if(config.sourceMaps, plugins.sourcemaps.init()))
-                .pipe(plugins.debug())
+                .pipe(config.debug ? plugins.debug() : plugins.util.noop())
                 .pipe(filter)
                 .pipe(plugins.compass({
                     require: ['sass-globbing'],
@@ -49,6 +49,7 @@ module.exports = function (gulp, plugins) {
         style: function (src, outputFilename, config) {
             var promise = gulp.src(src)
                 .pipe(plugins.plumber())
+                .pipe(config.debug ? plugins.debug() : plugins.util.noop())
                 .pipe(plugins.if(config.sourceMaps, plugins.sourcemaps.init()))
                 .pipe(plugins.sassGlob())
                 .pipe(plugins.sass())
@@ -77,6 +78,7 @@ module.exports = function (gulp, plugins) {
         script: function (src, outputFilename, config) {
             var promise = gulp.src(src)
                 .pipe(plugins.plumber())
+                .pipe(config.debug ? plugins.debug() : plugins.util.noop())
                 .pipe(plugins.if(config.sourceMaps, plugins.sourcemaps.init()))
                 .pipe(plugins.concat(config.jsPath + outputFilename))
                 .pipe(config.production ? plugins.uglify() : plugins.util.noop());
@@ -102,12 +104,13 @@ module.exports = function (gulp, plugins) {
         svgSprite: function(src, outputDir, config) {
             return gulp.src(src)
                 .pipe(plugins.plumber())
-                .pipe(plugins.debug())
+                .pipe(config.debug ? plugins.debug() : plugins.util.noop())
                 .pipe(plugins.svgSprite(config.svgSprite).on('error',function(e){console.log(e)}))
                 .pipe(gulp.dest(outputDir));
         },
         copy: function (srcFiles, outputDir, config) {
             return gulp.src(srcFiles)
+                .pipe(config.debug ? plugins.debug() : plugins.util.noop())
                 .pipe(gulp.dest(outputDir));
         }
     };
