@@ -60,7 +60,11 @@ module.exports = function (configuration) {
             if (_.isFunction(arguments[1])) {
                 callback = arguments[1];
                 gulp.task(name, function () {
-                    return callback(player)
+                    var promise = callback(player);
+                    if(!promise){
+                        promise = player.getLastPromise();
+                    }
+                    return promise;
                 });
             } else {
                 dependentTasks = arguments[1];
@@ -71,7 +75,11 @@ module.exports = function (configuration) {
             callback = arguments[2];
 
             gulp.task(name, dependentTasks, function () {
-                return callback(player);
+                var promise = callback(player);
+                if(!promise){
+                    promise = player.getLastPromise();
+                }
+                return promise;
             })
         }
     }
