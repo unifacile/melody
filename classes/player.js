@@ -1,4 +1,4 @@
-var Player = function (executor, config,environments) {
+var Player = function (executor, config, environments) {
     var self = this;
     var buffer = [];
     var Piper = require('./piper');
@@ -20,12 +20,12 @@ var Player = function (executor, config,environments) {
     };
 
     self.env = function (envName) {
-        if(envName === 'default'){
+        if (envName === 'default') {
             environment = config;
             return self;
         }
-        if(!_.has(environments, envName)){
-            throw "The environment "+envName+" doesn't exist";
+        if (!_.has(environments, envName)) {
+            throw "The environment " + envName + " doesn't exist";
         }
         environment = _.defaultsDeep(environments[envName], config);
 
@@ -73,12 +73,17 @@ var Player = function (executor, config,environments) {
     self.compass = function () {
         return piper.compass();
     };
+    
     self.style = function () {
         return piper.style();
     };
 
     self.script = function () {
         return piper.script();
+    };
+    
+    self.svgSprite = function () {
+        return piper.svgSprite()
     };
 
     self.copy = function () {

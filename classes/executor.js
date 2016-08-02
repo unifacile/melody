@@ -99,6 +99,13 @@ module.exports = function (gulp, plugins) {
 
             return promise;
         },
+        svgSprite: function(src, outputDir, config) {
+            return gulp.src(src)
+                .pipe(plugins.plumber())
+                .pipe(plugins.debug())
+                .pipe(plugins.svgSprite(config.svgSprite).on('error',function(e){console.log(e)}))
+                .pipe(gulp.dest(outputDir));
+        },
         copy: function (srcFiles, outputDir, config) {
             return gulp.src(srcFiles)
                 .pipe(gulp.dest(outputDir));

@@ -20,7 +20,21 @@ module.exports = function (configuration) {
         assetPath: 'app/Resources/assets/',
         cssPath: 'assets/css/',
         jsPath: 'assets/js/',
-        compassSassFolder: false
+        compassSassFolder: false,
+        svgSprite: {
+            mode: {
+                symbol: { // symbol mode to build the SVG
+                    render: {
+                        css: false, // CSS output option for icon sizing
+                        scss: false // SCSS output option for icon sizing
+                    },
+                    dest: 'sprite', // destination folder
+                    prefix: '.svg--%s', // BEM-style prefix if styles rendered
+                    sprite: 'sprite.svg', //generated sprite name
+                    example: true // Build a sample page, please!
+                }
+            }
+        }
     };
 
     var config = _.defaultsDeep(configuration, defaultConfigs);

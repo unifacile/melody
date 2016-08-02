@@ -3,3 +3,4 @@
 .idea
 /gulpfile.js
 /npm-debug.log
+*.tgz

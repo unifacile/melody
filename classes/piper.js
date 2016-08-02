@@ -26,6 +26,10 @@ var Piper = function (executor) {
         return pipeline.run(executor.script);
     };
 
+    self.svgSprite = function () {
+        return pipeline.run(executor.svgSprite)
+    };
+
     self.copy = function () {
         return pipeline.run(executor.copy);
     };
