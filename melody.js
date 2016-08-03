@@ -35,15 +35,15 @@ module.exports = function (configuration) {
                         css: false, // CSS output option for icon sizing
                         scss: false // SCSS output option for icon sizing
                     },
-                    dest: 'sprite', // destination folder
+                    dest: '', // destination folder
                     prefix: '.svg--%s', // BEM-style prefix if styles rendered
-                    sprite: 'sprite.svg', //generated sprite name
+                    sprite: 'vector-sprite.svg', //generated sprite name
                     example: true // Build a sample page, please!
                 }
             }
         },
         rasterSpriteOptions: {
-            imgName: 'sprite.png',
+            imgName: 'raster-sprite.png',
             cssName: 'sprite.scss',
             padding: 10, // Padding between images
             cssTemplate: path.resolve( __dirname, "./template/template.scss.handlebars" ),
