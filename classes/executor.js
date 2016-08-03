@@ -115,8 +115,6 @@ module.exports = function (gulp, plugins) {
 
             var prefixPath = _.replace(outputDir, config.rasterSpritePrefix, '/');
             config.rasterSpriteOptions.imgPath = prefixPath + '/' + config.rasterSpriteOptions.imgName;
-            console.log(config.rasterSpriteOptions);
-            console.log(config.rasterSpriteStylePath);
 
             var spriteData = gulp.src(src)
                 .pipe(config.debug ? plugins.debug() : plugins.util.noop())
