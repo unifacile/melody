@@ -4,6 +4,7 @@
 'variableNameTransforms': ['dasherize']
 }
 
+
 {{#extend "scss"}}
 {{!-- Delete these two block which are useless --}}
     {{#content "spritesheet-functions-comment"}}{{/content}}
@@ -12,15 +13,23 @@
 
 {{!-- Generate CSS classes for sprite --}}
 {{#block "css"}}
-{{#each sprites}}
-.sprite-{{strings.name}} {
-    @include sprite(${{strings.name}});
-    background-size: {{px.total_width}} {{px.total_height}};
-}
-{{/each}}
+    .asset {
+    display: inline-block;
+    overflow: hidden;
+    background-image: url("{{spritesheet.image}}");
+    background-size: {{half spritesheet.width}}px {{half spritesheet.height}}px;
+    }
+
+    {{#each sprites}}
+        .asset-{{strings.name}} {
+        width: {{half width}}px;
+        height: {{half height}}px;
+        background-position: {{half offset_x}}px {{half offset_y}}px;
+        }
+    {{/each}}
 {{/block}}
 
-{{!-- Handle retina version --}}
+{{!-- Handle retina version
 {{#block "retina"}}
 @media (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dpi) {
 {{#each sprites}}
@@ -31,3 +40,4 @@
 {{/each}}
 }
 {{/block}}
+--}}

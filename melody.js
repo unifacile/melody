@@ -46,7 +46,10 @@ module.exports = function (configuration) {
             imgName: 'sprite.png',
             cssName: 'sprite.scss',
             padding: 10, // Padding between images
-            cssTemplate: path.resolve( __dirname, "./template/template.scss.handlebars" )
+            cssTemplate: path.resolve( __dirname, "./template/template.scss.handlebars" ),
+            cssHandlebarsHelpers: {
+                half: function (num) { return num/2;}
+            }
         },
         rasterSpriteStylePath: "app/Resources/assets", // Where save generated sprite stylesheet
         rasterSpritePrefix: 'web/'
