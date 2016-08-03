@@ -46,13 +46,13 @@ module.exports = function (configuration) {
             imgName: 'raster-sprite.png',
             cssName: 'sprite.scss',
             padding: 10, // Padding between images
-            cssTemplate: path.resolve( __dirname, "./template/template.scss.handlebars" ),
-            cssHandlebarsHelpers: {
+            cssTemplate: path.resolve( __dirname, "./template/template.scss.handlebars" ), // Handlebars.js template path
+            cssHandlebarsHelpers: { // Handlebars.js helpers definition
                 half: function (num) { return num/2;}
             }
         },
-        rasterSpriteStylePath: "app/Resources/assets", // Where save generated sprite stylesheet
-        rasterSpritePrefix: 'web/'
+        rasterSpriteStylePath: "app/Resources/assets", // Where save generated sprite stylesheet (e.g app/Resources/assets/sprite.scss)
+        rasterSpritePrefix: 'web/' // Prefix to remove from sprite public path (e.g. web/assets/img/sprite.png -> /assets/img/sprite.png)
     };
 
     var config = _.defaultsDeep(configuration, defaultConfigs);
