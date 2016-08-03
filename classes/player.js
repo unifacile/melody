@@ -8,6 +8,8 @@ var Player = function (executor, config, environments) {
     var piper = new Piper(executor);
     var environment = config;
 
+    var lastPromise = null;
+
     var jollyPattern = function (path, extension) {
         if (extension) {
             if (path.charAt(path.length - 1) !== '/') {
@@ -71,32 +73,44 @@ var Player = function (executor, config, environments) {
     };
 
     self.compass = function () {
-        return piper.compass();
+        lastPromise = piper.compass();
+        return lastPromise;
     };
-    
+
     self.style = function () {
-        return piper.style();
+        lastPromise = piper.style();
+        return lastPromise;
     };
 
     self.script = function () {
-        return piper.script();
+        lastPromise = piper.script();
+        return lastPromise;
     };
-    
+
     self.vectorSprite = function () {
-        return piper.vectorSprite()
+        lastPromise = piper.vectorSprite();
+        return lastPromise;
     };
-    
+
     self.rasterSprite = function () {
-        return piper.rasterSprite()
+        lastPromise = piper.rasterSprite();
+        return lastPromise;
     };
 
     self.copy = function () {
-        return piper.copy();
+        lastPromise = piper.copy();
+        return lastPromise;
     };
 
     self.del = function (path, extension) {
         path = jollyPattern(path, extension);
-        del.sync(path);
+        lastPromise = del.sync(path);
+        return lastPromise;
+    };
+
+    // ------
+    self.getLastPromise = function () {
+        return lastPromise;
     };
 };
 
