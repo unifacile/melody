@@ -82,8 +82,12 @@ var Player = function (executor, config, environments) {
         return piper.script();
     };
     
-    self.svgSprite = function () {
-        return piper.svgSprite()
+    self.vectorSprite = function () {
+        return piper.vectorSprite()
+    };
+    
+    self.rasterSprite = function () {
+        return piper.rasterSprite()
     };
 
     self.copy = function () {

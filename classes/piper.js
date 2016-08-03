@@ -26,8 +26,12 @@ var Piper = function (executor) {
         return pipeline.run(executor.script);
     };
 
-    self.svgSprite = function () {
-        return pipeline.run(executor.svgSprite)
+    self.vectorSprite = function () {
+        return pipeline.run(executor.vectorSprite)
+    };
+    
+    self.rasterSprite = function () {
+        return pipeline.run(executor.rasterSprite)
     };
 
     self.copy = function () {

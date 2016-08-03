@@ -1,5 +1,6 @@
 module.exports = function (gulp, plugins) {
     var del = require('del');
+    const _ = require('lodash');
     return {
         compass: function (srcFiles, outputFilename, config) {
             if (!config.compassSassFolder) {
@@ -101,12 +102,30 @@ module.exports = function (gulp, plugins) {
 
             return promise;
         },
-        svgSprite: function(src, outputDir, config) {
+        vectorSprite: function (src, outputDir, config) {
             return gulp.src(src)
                 .pipe(plugins.plumber())
                 .pipe(config.debug ? plugins.debug() : plugins.util.noop())
-                .pipe(plugins.svgSprite(config.svgSprite).on('error',function(e){console.log(e)}))
+                .pipe(plugins.svgSprite(config.vectorSprite).on('error', function (e) {
+                    console.log(e)
+                }))
                 .pipe(gulp.dest(outputDir));
+        },
+        rasterSprite: function (src, outputDir, config) {
+
+            var prefixPath = _.replace(outputDir, config.rasterSpritePrefix, '/');
+            config.rasterSpriteOptions.imgPath = prefixPath + '/' + config.rasterSpriteOptions.imgName;
+            console.log(config.rasterSpriteOptions);
+            console.log(config.rasterSpriteStylePath);
+
+            var spriteData = gulp.src(src)
+                .pipe(config.debug ? plugins.debug() : plugins.util.noop())
+                .pipe(plugins.spritesmith(config.rasterSpriteOptions));
+
+            spriteData.img.pipe(gulp.dest(outputDir));
+            spriteData.css.pipe(gulp.dest(config.rasterSpriteStylePath));
+
+            return spriteData;
         },
         copy: function (srcFiles, outputDir, config) {
             return gulp.src(srcFiles)

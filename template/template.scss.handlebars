@@ -1,0 +1,33 @@
+{
+// Default options
+'functions': true,
+'variableNameTransforms': ['dasherize']
+}
+
+{{#extend "scss"}}
+{{!-- Delete these two block which are useless --}}
+    {{#content "spritesheet-functions-comment"}}{{/content}}
+    {{#content "spritesheet-functions"}}{{/content}}
+{{/extend}}
+
+{{!-- Generate CSS classes for sprite --}}
+{{#block "css"}}
+{{#each sprites}}
+.sprite-{{strings.name}} {
+    @include sprite(${{strings.name}});
+    background-size: {{px.total_width}} {{px.total_height}};
+}
+{{/each}}
+{{/block}}
+
+{{!-- Handle retina version --}}
+{{#block "retina"}}
+@media (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dpi) {
+{{#each sprites}}
+    .sprite-{{strings.name}} {
+        background-image: url('{{escaped_image}}');
+        background-size: {{px.total_width}} {{px.total_height}};
+    }
+{{/each}}
+}
+{{/block}}

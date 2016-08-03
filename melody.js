@@ -1,9 +1,15 @@
 // TODO: scrivere documentazione
 module.exports = function (configuration) {
-    const plugins = require('gulp-load-plugins')();
+    const plugins = require('gulp-load-plugins')({
+        rename: {
+            'gulp.spritesmith': 'spritesmith'
+        }
+    });
     const gulp = require('gulp');
     const executor = require('./classes/executor')(gulp, plugins);
     const _ = require('lodash');
+    const path = require('path');
+    
     var Player = require('./classes/player');
 
     if (!configuration) {
@@ -22,7 +28,7 @@ module.exports = function (configuration) {
         cssPath: 'assets/css/',
         jsPath: 'assets/js/',
         compassSassFolder: false,
-        svgSprite: {
+        vectorSprite: {
             mode: {
                 symbol: { // symbol mode to build the SVG
                     render: {
@@ -35,7 +41,15 @@ module.exports = function (configuration) {
                     example: true // Build a sample page, please!
                 }
             }
-        }
+        },
+        rasterSpriteOptions: {
+            imgName: 'sprite.png',
+            cssName: 'sprite.scss',
+            padding: 10, // Padding between images
+            cssTemplate: path.resolve( __dirname, "./template/template.scss.handlebars" )
+        },
+        rasterSpriteStylePath: "app/Resources/assets", // Where save generated sprite stylesheet
+        rasterSpritePrefix: 'web/'
     };
 
     var config = _.defaultsDeep(configuration, defaultConfigs);
