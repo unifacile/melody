@@ -22,10 +22,14 @@ Pipeline.prototype.run = function (callable) {
     var i = 0;
     var entries = this.entries;
     var executor = this.executor;
+    // prevent multiple call during watch task
+    var self = this;
 
     var runNextEntry = function () {
         // see if we're all done looping
         if (typeof entries[i] === 'undefined') {
+            // prevent multiple call during watch task
+            self.entries = [];
             deferred.resolve();
             return;
         }
