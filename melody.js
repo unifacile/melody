@@ -44,7 +44,7 @@ module.exports = function (configuration) {
         },
         rasterSpriteOptions: {
             imgName: 'raster-sprite.png',
-            cssName: 'sprite.scss',
+            cssName: '_sprite.scss',
             padding: 10, // Padding between images
             cssTemplate: path.resolve( __dirname, "./template/template.scss.handlebars" ), // Handlebars.js template path
             cssHandlebarsHelpers: { // Handlebars.js helpers definition

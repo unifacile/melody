@@ -13,20 +13,20 @@
 
 {{!-- Generate CSS classes for sprite --}}
 {{#block "css"}}
-    .asset {
+.asset {
     display: inline-block;
     overflow: hidden;
     background-image: url("{{spritesheet.image}}");
     background-size: {{half spritesheet.width}}px {{half spritesheet.height}}px;
-    }
+}
 
-    {{#each sprites}}
-        .asset-{{strings.name}} {
-        width: {{half width}}px;
-        height: {{half height}}px;
-        background-position: {{half offset_x}}px {{half offset_y}}px;
-        }
-    {{/each}}
+{{#each sprites}}
+.asset-{{strings.name}} {
+    width: {{half width}}px;
+    height: {{half height}}px;
+    background-position: {{half offset_x}}px {{half offset_y}}px;
+}
+{{/each}}
 {{/block}}
 
 {{!-- Handle retina version
