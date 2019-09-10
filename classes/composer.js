@@ -5,6 +5,7 @@ const rasterSpriteRunner = require('./runner/rasterSpriteRunner');
 const vectorSpriteRunner = require('./runner/vectorSpriteRunner');
 
 const { createPattern } = require('./utils');
+const _ = require('lodash');
 
 class Composer {
     constructor(config, environments, plugins) {
