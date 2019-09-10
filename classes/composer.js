@@ -1,11 +1,12 @@
-const scriptRunner = require('./runner/scriptRunner');
-const styleRunner = require('./runner/styleRunner');
-const copyRunner = require('./runner/copyRunner');
+const scriptRunner       = require('./runner/scriptRunner');
+const styleRunner        = require('./runner/styleRunner');
+const copyRunner         = require('./runner/copyRunner');
+const delRunner          = require('./runner/delRunner');
 const rasterSpriteRunner = require('./runner/rasterSpriteRunner');
 const vectorSpriteRunner = require('./runner/vectorSpriteRunner');
 
-const { createPattern } = require('./utils');
-const _ = require('lodash');
+const {createPattern} = require('./utils');
+const _               = require('lodash');
 
 class Composer {
     constructor(config, environments, plugins) {
@@ -46,6 +47,25 @@ class Composer {
         return this;
     }
 
+    asset(path, extension) {
+        path = createPattern(path, extension);
+        this.targets.push(this.config.assetPath + path);
+        return this;
+    }
+
+    public(path, extension) {
+        path = createPattern(path, extension);
+        this.targets.push(this.config.publicPath + path);
+        return this;
+    }
+
+    add(path, extension) {
+        path = createPattern(path, extension);
+        this.targets.push(path);
+        return this;
+    }
+
+
     record(destination) {
         this.sections.push({
             destination,
@@ -57,7 +77,7 @@ class Composer {
         return this;
     }
 
-    _runSectionWith(runner){
+    _runSectionWith(runner) {
         const $this = this;
 
         this.sections.forEach(function (section) {
@@ -74,19 +94,28 @@ class Composer {
     script() {
         return this._runSectionWith(scriptRunner);
     }
+
     style() {
         return this._runSectionWith(styleRunner);
     }
-    copy(){
+
+    copy() {
         return this._runSectionWith(copyRunner);
     }
-    rasterSprite(){
+
+    del() {
+        return this._runSectionWith(delRunner);
+    }
+
+    rasterSprite() {
         return this._runSectionWith(rasterSpriteRunner);
     }
-    vectorSprite(){
+
+    vectorSprite() {
         return this._runSectionWith(vectorSpriteRunner);
     }
-    compass(){
+
+    compass() {
         throw "Compass is not supported anymore";
     }
 }
