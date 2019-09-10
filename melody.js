@@ -1,25 +1,26 @@
-// TODO: scrivere documentazione
 module.exports = function (configuration) {
     const plugins = require('gulp-load-plugins')({
         rename: {
-            'gulp.spritesmith': 'spritesmith'
+            'gulp.spritesmith': 'spritesmith',
+            'gulp-clean-css': 'cleanCSS'
         }
     });
-    const gulp = require('gulp');
-    const executor = require('./classes/executor')(gulp, plugins);
-    const _ = require('lodash');
-    const path = require('path');
-    
-    var Player = require('./classes/player');
+    const gulp    = require('gulp');
+    const _       = require('lodash');
+    const path    = require('path');
+    const mode    = require('gulp-mode')();
+
+    const Composer = require('./classes/composer');
 
     if (!configuration) {
         configuration = {};
     }
-    var defaultConfigs = {
+    const isProduction   = mode.production();
+    const defaultConfigs = {
         debug: false,
         resourcePath: 'app/Resources/',
-        production: !!plugins.util.env.production,
-        sourceMaps: !plugins.util.env.production,
+        production: isProduction,
+        sourceMaps: !isProduction,
         revManifest: true,
         revManifestPath: 'app/Resources/assets/rev-manifest.json',
         publicPath: 'web/',
@@ -46,16 +47,18 @@ module.exports = function (configuration) {
             imgName: 'raster-sprite.png',
             cssName: '_sprite.scss',
             padding: 10, // Padding between images
-            cssTemplate: path.resolve( __dirname, "./template/template.scss.handlebars" ), // Handlebars.js template path
+            cssTemplate: path.resolve(__dirname, "./template/template.scss.handlebars"), // Handlebars.js template path
             cssHandlebarsHelpers: { // Handlebars.js helpers definition
-                half: function (num) { return num/2;}
+                half: function (num) {
+                    return num / 2;
+                }
             }
         },
         rasterSpriteStylePath: "app/Resources/assets", // Where save generated sprite stylesheet (e.g app/Resources/assets/sprite.scss)
         rasterSpritePrefix: 'web/' // Prefix to remove from sprite public path (e.g. web/assets/img/sprite.png -> /assets/img/sprite.png)
     };
 
-    var config = _.defaultsDeep(configuration, defaultConfigs);
+    const config       = _.defaultsDeep(configuration, defaultConfigs);
     /**
      *
      * @type {Array}
@@ -66,46 +69,50 @@ module.exports = function (configuration) {
      *      - cssPath: ex. assets/css/
      *      - jsPath: ex. assets/js/
      */
-    var environments = [];
+    const environments = [];
 
     function addGulpTask(/* name, tasksToExecute, callback */) {
-        var player = new Player(executor, config, environments);
-        var name = arguments[0];
-        var callback, dependentTasks;
+        if (arguments.length === 1) {
+            return addTask(arguments[0]);
+        }
+        const name = arguments[0];
+        let callback, dependentTasks;
 
-        if (arguments.length == 2) {
+        if (arguments.length === 2) {
             if (_.isFunction(arguments[1])) {
                 callback = arguments[1];
-                gulp.task(name, function () {
-                    var promise = callback(player);
-                    if(!promise){
-                        promise = player.getLastPromise();
-                    }
-                    return promise;
-                });
+                gulp.task(name, addTask(callback));
             } else {
                 dependentTasks = arguments[1];
                 gulp.task(name, dependentTasks);
             }
-        } else if (arguments.length == 3) {
-            dependentTasks = arguments[1];
-            callback = arguments[2];
-
-            gulp.task(name, dependentTasks, function () {
-                var promise = callback(player);
-                if(!promise){
-                    promise = player.getLastPromise();
-                }
-                return promise;
-            })
+            return;
         }
+
+        if (arguments.length === 3) {
+            dependentTasks = arguments[1];
+            callback       = arguments[2];
+
+            gulp.task(name, dependentTasks, addTask(callback));
+
+            return;
+        }
+
+        throw "Something went wrong during melody composition"
     }
 
-    function addEnvironment(envName, data) {
-        var envKeys = _.keys(data);
-        var defaultKeys = _.keys(defaultConfigs);
+    function addTask(instructions) {
+        const composer = new Composer(config, environments, plugins);
+        const tasks    = composer.play(instructions);
+        return gulp.series.apply(gulp, tasks);
+    }
 
-        var wrongKeys = _.difference(envKeys, defaultKeys);
+
+    function addEnvironment(envName, data) {
+        const envKeys     = _.keys(data);
+        const defaultKeys = _.keys(defaultConfigs);
+
+        const wrongKeys = _.difference(envKeys, defaultKeys);
 
         if (wrongKeys.length > 0) {
             throw "Some environment variable is not correct: " + wrongKeys.join(", ");

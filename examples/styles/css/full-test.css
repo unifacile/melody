@@ -1,0 +1,23 @@
+body {
+  color: #f00; }
+  body .main {
+    background-color: #0f0; }
+    body .main > div {
+      text-transform: uppercase; }
+
+.demo ul > li {
+  list-style: none; }
+  .demo ul > li a {
+    text-decoration: none; }
+
+body {
+  height: 100%; }
+  body .main {
+    color: #00f; }
+
+.testtest div > span {
+  display: inline-block; }
+  .testtest div > span a {
+    text-decoration: underline; }
+
+/*# sourceMappingURL=full-test.css.map */

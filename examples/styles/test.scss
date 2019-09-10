@@ -1,0 +1,18 @@
+body{
+  color:#f00;
+  .main{
+    background-color: #0f0;
+    & > div{
+      text-transform: uppercase;
+    }
+  }
+}
+
+.demo{
+  ul > li {
+    list-style: none;
+    a{
+      text-decoration: none;
+    }
+  }
+}
