@@ -36,9 +36,7 @@
   },
   "homepage": "https://github.com/unifacile/melody#readme",
   "dependencies": {
-    "gulp": "^4.0.2"
-  },
-  "devDependencies": {
+    "gulp": "^4.0.2",
     "del": "^5.1.0",
     "gulp-autoprefixer": "^7.0.0",
     "gulp-clean-css": "^4.2.0",
