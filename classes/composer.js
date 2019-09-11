@@ -1,4 +1,5 @@
 const scriptRunner       = require('./runner/scriptRunner');
+const typescriptRunner   = require('./runner/typescriptRunner');
 const styleRunner        = require('./runner/styleRunner');
 const copyRunner         = require('./runner/copyRunner');
 const delRunner          = require('./runner/delRunner');
@@ -93,6 +94,10 @@ class Composer {
 
     script() {
         return this._runSectionWith(scriptRunner);
+    }
+
+    typescript() {
+        return this._runSectionWith(typescriptRunner);
     }
 
     style() {

@@ -4,3 +4,4 @@
 /gulpfile.js
 /npm-debug.log
 *.tgz
+./package-lock.json

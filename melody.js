@@ -2,7 +2,8 @@ module.exports = function (configuration) {
     const plugins = require('gulp-load-plugins')({
         rename: {
             'gulp.spritesmith': 'spritesmith',
-            'gulp-clean-css': 'cleanCSS'
+            'gulp-clean-css': 'cleanCSS',
+            'gulp-typescript': 'typescript'
         }
     });
     const gulp    = require('gulp');
